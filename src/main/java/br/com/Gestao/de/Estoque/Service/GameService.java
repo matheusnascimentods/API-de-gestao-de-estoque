@@ -2,10 +2,13 @@ package br.com.Gestao.de.Estoque.Service;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.Gestao.de.Estoque.DTO.GameDTO;
@@ -52,6 +55,22 @@ public class GameService {
 		List<Game> JogosDisponiveis = repository.findByQuantidadeEstoqueGreaterThan(0);
 		
 		return GameDTO.CONVERT(JogosDisponiveis);
+		
+	}
+
+	public ResponseEntity<GameDTO> GETbyID(@PathVariable Long id){
+		
+		Optional<Game> jogoBuscado = repository.findById(id);
+		
+		if (jogoBuscado.get().getQuantidadeEstoque() > 0){
+			
+			return ResponseEntity.ok().body(new GameDTO(jogoBuscado.get()));
+			
+		}else {
+			
+			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(new GameDTO(jogoBuscado.get()));
+	
+		}
 		
 	}
 	
