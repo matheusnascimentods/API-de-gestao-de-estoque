@@ -47,4 +47,12 @@ public class GameService {
 		
 	}
 	
+	public List<GameDTO> GETavaibleGAMES(){
+		
+		List<Game> JogosDisponiveis = repository.findByQuantidadeEstoqueGreaterThan(0);
+		
+		return GameDTO.CONVERT(JogosDisponiveis);
+		
+	}
+	
 }
