@@ -2,10 +2,14 @@ package br.com.Gestao.de.Estoque.Controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.Gestao.de.Estoque.DTO.GameDTO;
 import br.com.Gestao.de.Estoque.Form.GameForm;
+import br.com.Gestao.de.Estoque.Form.GameFormUpdate;
 import br.com.Gestao.de.Estoque.Repository.GameRepository;
 import br.com.Gestao.de.Estoque.Service.GameService;
 
@@ -50,12 +55,18 @@ public class GameController {
 		
 	}
 	
-	
 	@PostMapping("/AddGame")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<GameDTO> Post(@RequestBody GameForm gameForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<GameDTO> Post(@RequestBody @Valid GameForm gameForm, UriComponentsBuilder uriBuilder) {
 		
 		return gameService.POST(gameForm, uriBuilder);
+		
+	}
+
+	@PatchMapping("/UpdateById/{id}") @Transactional
+	public ResponseEntity<GameDTO> Update(@RequestBody GameFormUpdate form, @PathVariable Long id){
+		
+		return gameService.UPDATE(form, id);
 		
 	}
 

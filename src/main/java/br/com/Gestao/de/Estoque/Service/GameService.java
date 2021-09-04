@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.Gestao.de.Estoque.DTO.GameDTO;
 import br.com.Gestao.de.Estoque.Form.GameForm;
+import br.com.Gestao.de.Estoque.Form.GameFormUpdate;
 import br.com.Gestao.de.Estoque.Repository.GameRepository;
 import br.com.Gestao.de.Estoque.Model.Game;
 
@@ -71,6 +73,14 @@ public class GameService {
 			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(new GameDTO(jogoBuscado.get()));
 	
 		}
+		
+	}
+
+	public ResponseEntity<GameDTO> UPDATE(@RequestBody GameFormUpdate form, @PathVariable Long id){
+		
+		Game game = form.Update(id, repository);
+		
+		return ResponseEntity.ok().body(new GameDTO(game));
 		
 	}
 	

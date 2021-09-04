@@ -1,13 +1,16 @@
 package br.com.Gestao.de.Estoque.Form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import br.com.Gestao.de.Estoque.Model.Game;
 
 public class GameForm {
 	
-	//@NotEmpty @NotNull
+	@NotEmpty @NotNull
 	private String NomeDoJogo;
 	
-	//@NotEmpty @NotNull
+	@NotEmpty @NotNull
 	private String Descricao;
 
 	private double Preco;
