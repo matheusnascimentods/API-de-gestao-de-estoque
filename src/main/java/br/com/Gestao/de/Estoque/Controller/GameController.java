@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,21 +38,21 @@ public class GameController {
 	@GetMapping("/ViewAllGames")
 	public List<GameDTO> GetAll(){
 		
-		return gameService.GETall();
+		return gameService.GetAll();
 		
 	}
 	
 	@GetMapping("/ViewAvailableGames")
-	public List<GameDTO> GetAvaible(){
+	public List<GameDTO> GetAvaibleGames(){
 		
-		return gameService.GETavaibleGAMES();
+		return gameService.GetAvaibleGames();
 		
 	}
 	
 	@GetMapping("/FindById/{id}")
 	public ResponseEntity<GameDTO> GetByID(@PathVariable Long id){
 		
-		return gameService.GETbyID(id);
+		return gameService.GetByID(id);
 		
 	}
 	
@@ -59,15 +60,22 @@ public class GameController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<GameDTO> Post(@RequestBody @Valid GameForm gameForm, UriComponentsBuilder uriBuilder) {
 		
-		return gameService.POST(gameForm, uriBuilder);
+		return gameService.Post(gameForm, uriBuilder);
 		
 	}
 
 	@PatchMapping("/UpdateById/{id}") @Transactional
 	public ResponseEntity<GameDTO> Update(@RequestBody GameFormUpdate form, @PathVariable Long id){
 		
-		return gameService.UPDATE(form, id);
+		return gameService.Update(form, id);
 		
 	}
 
+	@DeleteMapping("/DeleteById/{id}") @Transactional
+	public ResponseEntity<String> Delete(@PathVariable Long id){
+		
+		return gameService.Delete(id);
+		
+	}
+	
 }

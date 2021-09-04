@@ -30,7 +30,7 @@ public class GameService {
 	
 	}
 	
-	public ResponseEntity<GameDTO> POST(GameForm form, UriComponentsBuilder URIbuilder){
+	public ResponseEntity<GameDTO> Post(GameForm form, UriComponentsBuilder URIbuilder){
 		
 		Game game = form.CONVERT();
 		
@@ -42,7 +42,7 @@ public class GameService {
 		
 	}
 	
-	public List<GameDTO> GETall(){
+	public List<GameDTO> GetAll(){
 		
 		List<Game> game = repository.findAll();
 		
@@ -52,7 +52,7 @@ public class GameService {
 		
 	}
 	
-	public List<GameDTO> GETavaibleGAMES(){
+	public List<GameDTO> GetAvaibleGames(){
 		
 		List<Game> JogosDisponiveis = repository.findByQuantidadeEstoqueGreaterThan(0);
 		
@@ -60,7 +60,7 @@ public class GameService {
 		
 	}
 
-	public ResponseEntity<GameDTO> GETbyID(@PathVariable Long id){
+	public ResponseEntity<GameDTO> GetByID(@PathVariable Long id){
 		
 		Optional<Game> jogoBuscado = repository.findById(id);
 		
@@ -76,11 +76,19 @@ public class GameService {
 		
 	}
 
-	public ResponseEntity<GameDTO> UPDATE(@RequestBody GameFormUpdate form, @PathVariable Long id){
+	public ResponseEntity<GameDTO> Update(@RequestBody GameFormUpdate form, @PathVariable Long id){
 		
 		Game game = form.Update(id, repository);
 		
 		return ResponseEntity.ok().body(new GameDTO(game));
+		
+	}
+
+	public ResponseEntity<String> Delete(@PathVariable Long id){
+		
+		repository.deleteById(id);
+		
+		return ResponseEntity.ok().body("Exclusao concluida com exito");
 		
 	}
 	
