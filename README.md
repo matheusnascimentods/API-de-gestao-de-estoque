@@ -1,4 +1,4 @@
-# Api-de-gestao-de-estoque
+<h1>Api-de-gestao-de-estoque</h1>
 
 <h2>Descrição:</h2>
 
@@ -6,7 +6,7 @@ Este repositório guarda uma API de gerenciamento de estoque de uma loja de jogo
 
 <h2>Endpoints e seus métodos</h2>
 
-## Métodos GET:
+<h4>Métodos GET:</h3>
 
 ```Ruby
 
@@ -21,7 +21,7 @@ $ endpoint: http://localhost:8080/Jogos/FindById/id do jogo desejado
 
 ```
 
-##  Métodos POST:
+<h3>Métodos POST:</h3>
 
 ```Ruby                          
 Cadastrar novo jogo:                   
@@ -30,7 +30,7 @@ $ body: "nomeDoJogo": "", "quantidadeEstoque": 0, "preco": 0.0,  "descricao": ""
 
 ```
 
-## Métodos PATCH:
+<h3>Métodos PATCH:</h3>
 
 ```Ruby                                 
 Atualizar jogo:                   
@@ -39,14 +39,14 @@ $ body: "quantidadeEstoque": 0, "preco": 00.00
 
 ```
 
-## Métodos DELETE:
+<h3>Métodos DELETE:</h3>
 
 ```Ruby                                 
 Excluir jogo:                   
 $ endpoint: http://localhost:8080/Jogos/DeleteById/id do jogo desejado
 ```
 
-## Especificação:
+<h2>Especificações:</h2>
 
 ```python                                 
 $ Java: 8
