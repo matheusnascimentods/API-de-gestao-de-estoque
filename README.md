@@ -6,7 +6,7 @@ Este repositório guarda uma API de gerenciamento de estoque de uma loja de jogo
 
 <h2>Endpoints e seus métodos</h2>
 
-<h4>Métodos GET:</h3>
+<h3>Métodos GET:</h3>
 
 ```Ruby
 
