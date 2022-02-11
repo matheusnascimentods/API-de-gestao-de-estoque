@@ -26,7 +26,14 @@ $ endpoint: http://localhost:8080/Jogos/FindById/id do jogo desejado
 ```Ruby                          
 Cadastrar novo jogo:                   
 $ endpoint: http://localhost:8080/Jogos/AddGame
-$ body: "nomeDoJogo": "", "quantidadeEstoque": 0, "preco": 0.0,  "descricao": ""
+$ body: {
+
+  "nomeDoJogo": "", 
+  "quantidadeEstoque": 0, 
+  "preco": 0.0, 
+  "descricao": ""
+ 
+ }
 
 ```
 
@@ -35,7 +42,12 @@ $ body: "nomeDoJogo": "", "quantidadeEstoque": 0, "preco": 0.0,  "descricao": ""
 ```Ruby                                 
 Atualizar jogo:                   
 $ endpoint: http://localhost:8080/Jogos/UpdateById/id do jogo desejado
-$ body: "quantidadeEstoque": 0, "preco": 00.00
+$ body: {
+
+  "quantidadeEstoque": 0,
+  "preco": 00.00
+  
+  }
 
 ```
 
