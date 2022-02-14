@@ -23,7 +23,7 @@ import br.com.Gestao.de.Estoque.DTO.GameDTO;
 import br.com.Gestao.de.Estoque.Form.GameForm;
 import br.com.Gestao.de.Estoque.Form.GameFormUpdate;
 import br.com.Gestao.de.Estoque.Repository.GameRepository;
-import br.com.Gestao.de.Estoque.Service.GameService;
+import br.com.Gestao.de.Estoque.Service.GameServiceImpl;
 
 @RestController
 @RequestMapping("Jogos")
@@ -33,26 +33,26 @@ public class GameController {
 	GameRepository repository;
 	
 	@Autowired
-	GameService gameService = new GameService(repository);
+	GameServiceImpl gameService = new GameServiceImpl(repository);
 	
 	@GetMapping("/ViewAllGames")
 	public List<GameDTO> GetAll(){
 		
-		return gameService.GetAll();
+		return gameService.ReadAll();
 		
 	}
 	
 	@GetMapping("/ViewAvailableGames")
 	public List<GameDTO> GetAvaibleGames(){
 		
-		return gameService.GetAvaibleGames();
+		return gameService.ReadAllAvaible();
 		
 	}
 	
 	@GetMapping("/FindById/{id}")
 	public ResponseEntity<GameDTO> GetByID(@PathVariable Long id){
 		
-		return gameService.GetByID(id);
+		return gameService.ReadById(id);
 		
 	}
 	
@@ -60,7 +60,7 @@ public class GameController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<GameDTO> Post(@RequestBody @Valid GameForm gameForm, UriComponentsBuilder uriBuilder) {
 		
-		return gameService.Post(gameForm, uriBuilder);
+		return gameService.Create(gameForm, uriBuilder);
 		
 	}
 
