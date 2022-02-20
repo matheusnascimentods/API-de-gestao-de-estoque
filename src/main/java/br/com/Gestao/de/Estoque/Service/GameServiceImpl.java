@@ -32,7 +32,6 @@ public class GameServiceImpl implements GameService{
 	public ResponseEntity<GameDTO> Create(GameForm form, UriComponentsBuilder URIbuilder) {
 		
 		Game game = form.CONVERT();
-		
 		repository.save(game);
 		
 		URI uri = URIbuilder.path("/Jogos/{id}")
@@ -45,34 +44,32 @@ public class GameServiceImpl implements GameService{
 	@Override
 	public List<GameDTO> ReadAll() {
 		
-		List<Game> game = repository.findAll();	
-		List<GameDTO> gameDTO = GameDTO.CONVERT(game);	
+		List<GameDTO> AllGames = GameDTO.CONVERT(repository.findAll());	
 		
-		return gameDTO;
+		return AllGames;
 	
 	}
 	
 	@Override
 	public List<GameDTO> ReadAllAvaible() {
 		
-		List<Game> JogosDisponiveis = repository.findByQuantidadeEstoqueGreaterThan(0);
-		
-		return GameDTO.CONVERT(JogosDisponiveis);
+		return GameDTO.CONVERT(repository.findByQuantidadeEstoqueGreaterThan(0));
 	
 	}
 	
 	@Override
 	public ResponseEntity<GameDTO> ReadById(Long id) {
 		
-		Optional<Game> jogoBuscado = repository.findById(id);
+		Optional<Game> SearchedGame = repository.findById(id);
 		
-		if (jogoBuscado.get().getQuantidadeEstoque() > 0){
+		if (SearchedGame.get().getQuantidadeEstoque() > 0){
 			
-			return ResponseEntity.ok().body(new GameDTO(jogoBuscado.get()));
+			return ResponseEntity.ok().body(new GameDTO(SearchedGame.get()));
 			
 		}else {
 			
-			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(new GameDTO(jogoBuscado.get()));
+			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(new GameDTO(SearchedGame.get()));
+		
 		}
 
 	}
@@ -81,7 +78,6 @@ public class GameServiceImpl implements GameService{
 	public ResponseEntity<GameDTO> Update(GameFormUpdate form, Long id) {
 	
 		Game game = form.Update(id, repository);
-		
 		return ResponseEntity.ok().body(new GameDTO(game));
 	
 	}
@@ -90,13 +86,8 @@ public class GameServiceImpl implements GameService{
 	public ResponseEntity<String> Delete(Long id) {
 	
 		repository.deleteById(id);
-		
-		return ResponseEntity.ok().body("Exclusao concluida com exito");
+		return ResponseEntity.ok().body("Exclusão concluída com exito");
 	
 	}
-
-
-
-
-		
+	
 }

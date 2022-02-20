@@ -35,32 +35,32 @@ public class GameController {
 	@Autowired
 	GameServiceImpl gameService = new GameServiceImpl(repository);
 	
+	@PostMapping("/AddGame")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<GameDTO> Create(@RequestBody @Valid GameForm gameForm, UriComponentsBuilder uriBuilder) {
+		
+		return gameService.Create(gameForm, uriBuilder);
+		
+	}
+	
 	@GetMapping("/ViewAllGames")
-	public List<GameDTO> GetAll(){
+	public List<GameDTO> ReadAll(){
 		
 		return gameService.ReadAll();
 		
 	}
 	
 	@GetMapping("/ViewAvailableGames")
-	public List<GameDTO> GetAvaibleGames(){
+	public List<GameDTO> ReadAllAvaible(){
 		
 		return gameService.ReadAllAvaible();
 		
 	}
 	
 	@GetMapping("/FindById/{id}")
-	public ResponseEntity<GameDTO> GetByID(@PathVariable Long id){
+	public ResponseEntity<GameDTO> ReadById(@PathVariable Long id){
 		
 		return gameService.ReadById(id);
-		
-	}
-	
-	@PostMapping("/AddGame")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<GameDTO> Post(@RequestBody @Valid GameForm gameForm, UriComponentsBuilder uriBuilder) {
-		
-		return gameService.Create(gameForm, uriBuilder);
 		
 	}
 
